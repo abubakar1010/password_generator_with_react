@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
@@ -10,6 +10,43 @@ function App() {
 
   const [ isCharacterAdded, setIsCharacterAdded] = useState(false)
   const [ isNumberAdded, setIsNumberAdded] = useState(false)
+
+  useEffect( () => {
+
+    let content = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+
+    if (isNumberAdded) {
+      content += '1234567890'
+      // console.log('num');
+      // console.log(content);
+    }
+    if (isCharacterAdded) {
+      content += '!@#$%^&*$?.,%`'
+      // console.log('ch');
+    }
+
+    // console.log(isNumberAdded);
+    // console.log(isCharacterAdded);
+
+    let pass =""
+
+    for ( let i = 0; i <= length - 1; i++){
+
+      const random = Math.floor(Math.random() * content.length);
+
+      console.log(content.charAt(random));
+
+      pass += content.charAt(random)
+
+    }
+
+    console.log(pass);
+
+    setPassword(pass)
+
+  },[length,isCharacterAdded,isNumberAdded,isNumberAdded])
+
+  
 
   return (
     <>
@@ -23,6 +60,7 @@ function App() {
       readOnly
       className=' w-96 px-4 rounded-md py-2'
       placeholder='Password'
+      value={password}
 
       />
 
@@ -34,18 +72,20 @@ function App() {
 
       <div className=' flex items-center gap-2'>
         <input type="range"
-        min={8}
+        min={2}
         max={20}
+        value={length}
+        onChange={  (e) => setLength(e.target.value) }
         />
         <label htmlFor="" className=' text-white font-bold'>Length: {length}</label>
       </div>
 
       <div className='flex items-center gap-2'>
-        <input type="checkbox" name="" id="" />
+        <input type="checkbox" name="" id="" defaultChecked={isNumberAdded} onChange={ () => setIsNumberAdded(!isNumberAdded)}/>
         <label htmlFor="" className='text-white font-bold'>Number</label>
       </div>
       <div className='flex items-center gap-2'>
-        <input type="checkbox" name="" id=""  />
+        <input type="checkbox" name="" id="" defaultChecked={isCharacterAdded} onChange={ () => setIsCharacterAdded(!isCharacterAdded)} />
         <label htmlFor="" className='text-white font-bold'>Character</label>
       </div>
     </div>

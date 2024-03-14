@@ -17,16 +17,11 @@ function App() {
 
     if (isNumberAdded) {
       content += '1234567890'
-      // console.log('num');
-      // console.log(content);
     }
     if (isCharacterAdded) {
       content += '!@#$%^&*$?.,%`'
-      // console.log('ch');
     }
 
-    // console.log(isNumberAdded);
-    // console.log(isCharacterAdded);
 
     let pass =""
 

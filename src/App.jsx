@@ -31,13 +31,13 @@ function App() {
 
       const random = Math.floor(Math.random() * content.length);
 
-      console.log(content.charAt(random));
+      // console.log(content.charAt(random));
 
       pass += content.charAt(random)
 
     }
 
-    console.log(pass);
+    // console.log(pass);
 
     setPassword(pass)
 

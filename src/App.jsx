@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 
 function App() {
@@ -10,6 +10,8 @@ function App() {
 
   const [ isCharacterAdded, setIsCharacterAdded] = useState(false)
   const [ isNumberAdded, setIsNumberAdded] = useState(false)
+
+  const collectRef = useRef(null)
 
   useEffect( () => {
 
@@ -39,12 +41,14 @@ function App() {
 
     setPassword(pass)
 
-  },[length,isCharacterAdded,isNumberAdded,isNumberAdded])
+  },[length,isCharacterAdded,isNumberAdded,setPassword])
 
 
   const handleCopyToClipboard = () => {
 
-    
+    window.navigator.clipboard.writeText(password)
+
+    collectRef.current?.select()
   }
 
   
@@ -62,6 +66,7 @@ function App() {
       className=' w-96 px-4 rounded-md py-2'
       placeholder='Password'
       value={password}
+      ref={collectRef}
 
       />
 
